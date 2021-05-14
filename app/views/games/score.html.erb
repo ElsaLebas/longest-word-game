@@ -1,3 +1,8 @@
 <h1>RESULT</h1>
 <p><%= @result %></p>
+<p>
+  <% if @score.nil? == false %>
+    your score is = <%= @score %>
+  <% end %>
+</p>
 <p><%= link_to "play again", '/new' %></p>

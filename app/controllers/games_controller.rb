@@ -16,6 +16,7 @@ class GamesController < ApplicationController
       @result = "Sorry but #{params[:word].upcase}, is not a valid English word ..."
     else
       @result = "Congratulations! #{params[:word].upcase} is a valid English word"
+      compute_score
     end
   end
 
@@ -30,4 +31,13 @@ class GamesController < ApplicationController
   def word_letters_in_grid?(try, grid)
     try.all? { |letter| grid.count(letter) >= try.count(letter) }
   end
+
+  def compute_score
+    url = "https://wagon-dictionary.herokuapp.com/#{params[:word]}"
+    player_guess_serialized = URI.open(url).read
+    player_guess = JSON.parse(player_guess_serialized)
+    @score =+ player_guess["length"]
+  end
 end
+
+# store each score and add it to a grand total
