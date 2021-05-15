@@ -3,8 +3,10 @@ require 'open-uri'
 
 class GamesController < ApplicationController
   def new
+    # @current_user = session[:session_id]
     @letters = []
     10.times { @letters << ('A'..'Z').to_a.sample}
+    raise
   end
 
   def score
